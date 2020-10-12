@@ -12,7 +12,7 @@ public class Conta {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_CONTA")
-	@SequenceGenerator(name = "SEQ_CONTA", sequenceName = "public.id_seq_conta", allocationSize = 1)
+	@SequenceGenerator(name = "SEQ_CONTA", sequenceName = "public.id_seq_conta", allocationSize = 1, initialValue = 2)
 	@Column(name = "id")
 	private Integer id;
 	
@@ -25,7 +25,10 @@ public class Conta {
 	@Column
 	private Double saldo = 0.0;
 	
-	public Conta() {}
+	public Conta() {
+		this.ativo = true;
+		this.saldo = 0.0;
+	}
 	
 	public Integer getId() {
 		return id;

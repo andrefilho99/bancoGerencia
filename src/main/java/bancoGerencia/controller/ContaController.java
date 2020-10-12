@@ -16,8 +16,13 @@ public class ContaController {
 	@Autowired
 	private ContaService contaService;
 	
-	@GetMapping("/{id}")
-	public Conta one(@PathVariable Integer id) {
-		return contaService.getConta(id);
+	@GetMapping("/{numConta}")
+	public Conta one(@PathVariable String numConta) {
+		return contaService.getConta(numConta);
+	}
+	
+	@GetMapping("/create")
+	public String create() {
+		return contaService.createConta();
 	}
 }
