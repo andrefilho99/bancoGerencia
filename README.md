@@ -7,6 +7,6 @@ O projeto em questão consiste no desenvolvimento de uma aplicação, simples, m
 Com desenvolvimento baseado na linguagem Java para back-end e em HTML/CSS/Javascript para o front-end, o foco será também na utilização do padrão de projeto Commander.
 
 ## Branches
-* Master
-* Dev
-* Issues
+* main
+* dev
+* issues
