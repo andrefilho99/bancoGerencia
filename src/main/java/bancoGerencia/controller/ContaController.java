@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import bancoGerencia.exceptions.ContaException;
+import bancoGerencia.exceptions.SaldoException;
+import bancoGerencia.exceptions.ValorException;
 import bancoGerencia.model.Conta;
 import bancoGerencia.service.ContaService;
 
@@ -31,4 +33,29 @@ public class ContaController {
 	public String create() {
 		return contaService.createConta();
 	}
+	
+	@GetMapping("/saldo/{numConta}")
+	public Double getSaldo(@PathVariable String numConta) throws ContaException {
+		return contaService.getSaldo(numConta);
+	}
+	
+	@GetMapping("/creditar/{numConta}/{valor}")
+	public void creditar(@PathVariable String numConta, @PathVariable Double valor) throws ContaException, ValorException {
+		contaService.creditar(numConta, valor);
+	}
+	
+	@GetMapping("/debitar/{numConta}/{valor}")
+	public void debitar(
+			@PathVariable String numConta, @PathVariable Double valor
+			) throws ContaException, ValorException, SaldoException {
+		contaService.debitar(numConta, valor);
+	}
+	
+	@GetMapping("/debitar/{contaOrig}/{contaDest}/{valor}/")
+	public void transferir(
+			@PathVariable String contaOrig, @PathVariable String contaDest, @PathVariable Double valor
+			) throws ContaException, ValorException, SaldoException {
+		contaService.transferir(contaOrig, contaDest, valor);
+	}
+	
 }
