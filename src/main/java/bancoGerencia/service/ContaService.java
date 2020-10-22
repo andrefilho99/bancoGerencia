@@ -1,5 +1,6 @@
 package bancoGerencia.service;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.transaction.Transactional;
@@ -20,6 +21,17 @@ public class ContaService {
 	private ContaRepository contaRepository;
 	
 	private Operacao operacao;
+	
+	public List<Conta> getAll() throws ContaException{
+		
+		List<Conta> contas = contaRepository.findAll();	
+		
+		if(contas == null) {
+			throw new ContaException("Não foi possível recuperar as contas do sistema.");
+		}
+		
+		return contas;
+	}
 	
 	//Caso não ache a conta lançar exceção
 	public Conta getConta(String numConta) throws ContaException{
