@@ -1,6 +1,9 @@
 package bancoGerencia.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,11 +16,17 @@ import bancoGerencia.model.Conta;
 import bancoGerencia.service.ContaService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/contas")
 public class ContaController {
 
 	@Autowired
 	private ContaService contaService;
+	
+	@GetMapping("/")
+	public List<Conta> all() throws ContaException {
+		return contaService.getAll();
+	}
 	
 	@GetMapping("/{numConta}")
 	public Conta one(@PathVariable String numConta) {
@@ -51,7 +60,7 @@ public class ContaController {
 		contaService.debitar(numConta, valor);
 	}
 	
-	@GetMapping("/debitar/{contaOrig}/{contaDest}/{valor}/")
+	@GetMapping("/transferir/{contaOrig}/{contaDest}/{valor}")
 	public void transferir(
 			@PathVariable String contaOrig, @PathVariable String contaDest, @PathVariable Double valor
 			) throws ContaException, ValorException, SaldoException {
