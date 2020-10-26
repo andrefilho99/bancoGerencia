@@ -25,9 +25,13 @@ public class Conta {
 	@Column
 	private Double saldo = 0.0;
 	
+	@Column
+	private Double bonus = 0.0;
+	
 	public Conta() {
 		this.ativo = true;
 		this.saldo = 0.0;
+		this.bonus = 0.0;
 	}
 	
 	public Integer getId() {
@@ -60,5 +64,13 @@ public class Conta {
 
 	public void setSaldo(Double saldo) {
 		this.saldo = saldo;
+	}
+
+	public Double getBonus() {
+		return bonus;
+	}
+
+	public void setBonus(Double bonus) {
+		this.bonus = bonus;
 	}
 }
