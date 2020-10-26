@@ -10,4 +10,3 @@ Com desenvolvimento baseado na linguagem Java para back-end e em HTML/CSS/Javasc
 * main
 * dev
 * issues
-  * issue6
