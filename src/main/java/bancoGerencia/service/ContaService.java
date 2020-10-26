@@ -78,6 +78,13 @@ public class ContaService {
 		return operacao.execute();
 	}
 	
+	public Double getBonus(String numConta) throws ContaException {
+		
+		Conta conta = getConta(numConta);	
+		operacao = new OperacaoGetBonus(conta);
+		return operacao.execute();
+	}
+	
 	@Transactional
 	public void creditar(String numConta, Double valor) throws ContaException, ValorException {
 		

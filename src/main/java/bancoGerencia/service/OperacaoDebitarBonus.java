@@ -16,7 +16,7 @@ public class OperacaoDebitarBonus implements Operacao{
 	@Override
 	public Double execute() {
 		Double novoBonus = conta.getBonus() - valorBonus;
-		conta.setSaldo(novoBonus);
+		conta.setBonus(novoBonus);
 		return novoBonus;
 	}
 }
