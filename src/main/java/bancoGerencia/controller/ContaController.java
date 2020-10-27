@@ -54,16 +54,17 @@ public class ContaController {
 	}
 	
 	@GetMapping("/debitar/{numConta}/{valor}")
-	public void debitar(
-			@PathVariable String numConta, @PathVariable Double valor
-			) throws ContaException, ValorException, SaldoException {
+	public void debitar(@PathVariable String numConta, @PathVariable Double valor) throws ContaException, ValorException, SaldoException {
 		contaService.debitar(numConta, valor);
 	}
 	
+	@GetMapping("/debitar-bonus/{numConta}/{valor}")
+	public void debitarBonus(@PathVariable String numConta, @PathVariable Double valor) throws ContaException, ValorException, SaldoException {
+		contaService.debitarBonus(numConta, valor);
+	}
+	
 	@GetMapping("/transferir/{contaOrig}/{contaDest}/{valor}")
-	public void transferir(
-			@PathVariable String contaOrig, @PathVariable String contaDest, @PathVariable Double valor
-			) throws ContaException, ValorException, SaldoException {
+	public void transferir(@PathVariable String contaOrig, @PathVariable String contaDest, @PathVariable Double valor) throws ContaException, ValorException, SaldoException {
 		contaService.transferir(contaOrig, contaDest, valor);
 	}
 	

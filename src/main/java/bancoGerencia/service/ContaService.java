@@ -78,6 +78,13 @@ public class ContaService {
 		return operacao.execute();
 	}
 	
+	public Double getBonus(String numConta) throws ContaException {
+		
+		Conta conta = getConta(numConta);	
+		operacao = new OperacaoGetBonus(conta);
+		return operacao.execute();
+	}
+	
 	@Transactional
 	public void creditar(String numConta, Double valor) throws ContaException, ValorException {
 		
@@ -102,6 +109,20 @@ public class ContaService {
 		verificarDebitoConta(conta, valor, "Saldo menor que o valor do débito.");
 		
 		operacao = new OperacaoDebitar(conta, valor);
+		operacao.execute();
+		
+		contaRepository.save(conta);
+	}
+	
+	@Transactional
+	public void debitarBonus(String numConta, Double valor) throws ContaException, ValorException, SaldoException {
+		
+		Conta conta = getConta(numConta);
+		
+		verificarValor(valor);
+		verificarDebitoBonusConta(conta, valor, "Bônus menor que o valor do débito.");
+		
+		operacao = new OperacaoDebitarBonus(conta, valor);
 		operacao.execute();
 		
 		contaRepository.save(conta);
@@ -149,6 +170,13 @@ public class ContaService {
 	private void verificarDebitoConta(Conta conta, Double valor, String message) throws SaldoException {
 		
 		if(conta.getSaldo() < valor) {
+			throw new SaldoException(message);
+		}
+	}
+	
+	private void verificarDebitoBonusConta(Conta conta, Double valor, String message) throws SaldoException {
+		
+		if(conta.getBonus() < valor) {
 			throw new SaldoException(message);
 		}
 	}

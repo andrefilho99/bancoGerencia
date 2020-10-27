@@ -16,7 +16,9 @@ public class OperacaoCreditar implements Operacao {
 	@Override
 	public Double execute() {
 		Double novoBalanco = conta.getSaldo() + valor;
+		Double novoBonus = conta.getBonus() + (valor*0.01);
 		conta.setSaldo(novoBalanco);
+		conta.setBonus(novoBonus);
 		return novoBalanco;
 		
 	}

@@ -132,5 +132,27 @@ public class ContaTest {
 		String numContaDestino = contaService.createConta();
 		contaService.transferir(numContaOrigem, numContaDestino, -10.0);
 	}
+	
+	@Test
+	public void creditarBonus() throws ContaException, ValorException {
+		String numConta = contaService.createConta();
+		contaService.creditar(numConta, 100.0);
+		assertEquals(1.0, contaService.getBonus(numConta), 0.0001);
+	}
+	
+	@Test
+	public void debitarBonus() throws ContaException, ValorException, SaldoException {
+		String numConta = contaService.createConta();
+		contaService.creditar(numConta, 100.0);
+		contaService.debitarBonus(numConta, 1.0);
+		assertEquals(0.0, contaService.getBonus(numConta), 0.0001);
+	}
+	
+	@Test(expected = SaldoException.class)
+	public void debitarBonusSemSaldo() throws ContaException, ValorException, SaldoException {
+		String numConta = contaService.createConta();
+		contaService.creditar(numConta, 100.0);
+		contaService.debitarBonus(numConta, 10.0);
+	}
 }
 
