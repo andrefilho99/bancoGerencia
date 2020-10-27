@@ -13,7 +13,7 @@ const Home = () => {
 
     const options = [
         {link: 'listar-contas', opt: 'Contas ativas'},
-        {link: 'creditar', opt: 'Creditar em conta'},
+        {link: 'depositar', opt: 'Depósito em conta'},
         {link: 'debitar', opt: 'Debitar de conta'},
         {link: 'transferir', opt: 'Transferência entre contas'},
         {link: 'saldo', opt: 'Verificar saldo'},
