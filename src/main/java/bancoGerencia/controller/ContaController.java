@@ -25,6 +25,7 @@ public class ContaController {
 	
 	
 	
+	
 	@GetMapping("/")
 	public List<Conta> all() throws ContaException {
 		return contaService.getAll();
